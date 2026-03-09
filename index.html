@@ -2,273 +2,231 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Jasa Arduino & IoT Code</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 
-body {
-  background: radial-gradient(ellipse at 50% 0%, #0b1a2e 0%, #020508 70%);
-  display: flex; justify-content: center; align-items: flex-start;
-  min-height: 100vh; font-family: 'Rajdhani', sans-serif; padding: 28px 14px;
+body{
+  background:radial-gradient(ellipse at 50% 0%,#0b1a2e 0%,#020508 70%);
+  min-height:100vh; font-family:'Rajdhani',sans-serif;
+  display:flex; justify-content:center; align-items:flex-start;
+  padding:16px 12px 32px;
 }
 
-/* ── CARD ── */
-.card {
-  width: 720px;
-  background: linear-gradient(170deg, #091525 0%, #060d1a 55%, #030810 100%);
-  border: 1px solid #0d2a42; border-radius: 10px; position: relative; overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(0,180,255,.05), 0 30px 90px rgba(0,0,0,.85),
-              0 0 140px rgba(0,100,200,.08), inset 0 1px 0 rgba(0,180,255,.08);
+/* CARD */
+.card{
+  width:100%; max-width:680px;
+  background:linear-gradient(170deg,#091525 0%,#060d1a 55%,#030810 100%);
+  border:1px solid #0d2a42; border-radius:12px;
+  position:relative; overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,180,255,.05),0 20px 60px rgba(0,0,0,.8),inset 0 1px 0 rgba(0,180,255,.08);
 }
-.card::before {
-  content:''; position:absolute; inset:0;
-  background-image: linear-gradient(rgba(0,150,255,.03) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0,150,255,.03) 1px, transparent 1px);
-  background-size: 36px 36px; z-index:0; animation: grid-shift 22s linear infinite;
+.card::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,150,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,150,255,.03) 1px,transparent 1px);
+  background-size:32px 32px; z-index:0; animation:gs 20s linear infinite;
 }
-@keyframes grid-shift { 100%{ background-position: 36px 36px; } }
+@keyframes gs{100%{background-position:32px 32px}}
 
-.glow-t { position:absolute; top:-130px; left:50%; transform:translateX(-50%);
-  width:620px; height:280px; background:radial-gradient(ellipse,rgba(0,140,255,.2) 0%,transparent 70%); z-index:1; pointer-events:none; }
-.glow-g { position:absolute; bottom:60px; right:-90px; width:340px; height:340px;
-  background:radial-gradient(ellipse,rgba(0,255,120,.05) 0%,transparent 70%); z-index:1; pointer-events:none; }
-.glow-p { position:absolute; top:40%; left:-80px; width:260px; height:260px;
-  background:radial-gradient(ellipse,rgba(180,80,255,.04) 0%,transparent 70%); z-index:1; pointer-events:none; }
+.glow-t{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:100%;height:240px;background:radial-gradient(ellipse,rgba(0,140,255,.18) 0%,transparent 70%);z-index:1;pointer-events:none}
+.glow-g{position:absolute;bottom:40px;right:-60px;width:280px;height:280px;background:radial-gradient(ellipse,rgba(0,255,120,.05) 0%,transparent 70%);z-index:1;pointer-events:none}
 
-.scanline { position:absolute; top:-2px; left:0; width:100%; height:2px;
-  background:linear-gradient(90deg,transparent,#00d4ff 50%,transparent); opacity:.5;
-  animation:scan 5s linear infinite; z-index:15; }
-@keyframes scan { 0%{top:-2px;opacity:.6} 95%{opacity:.3} 100%{top:100%;opacity:0} }
+.scanline{position:absolute;top:-2px;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,#00d4ff 50%,transparent);opacity:.45;animation:scan 5s linear infinite;z-index:15}
+@keyframes scan{0%{top:-2px;opacity:.6}95%{opacity:.2}100%{top:100%;opacity:0}}
 
-.corner { position:absolute; width:28px; height:28px; z-index:6; }
-.c-tl{top:14px;left:14px;border-top:2px solid #00b4ff;border-left:2px solid #00b4ff}
-.c-tr{top:14px;right:14px;border-top:2px solid #00b4ff;border-right:2px solid #00b4ff}
-.c-bl{bottom:14px;left:14px;border-bottom:2px solid #00b4ff;border-left:2px solid #00b4ff}
-.c-br{bottom:14px;right:14px;border-bottom:2px solid #00b4ff;border-right:2px solid #00b4ff}
+.corner{position:absolute;width:22px;height:22px;z-index:6}
+.c-tl{top:12px;left:12px;border-top:2px solid #00b4ff;border-left:2px solid #00b4ff}
+.c-tr{top:12px;right:12px;border-top:2px solid #00b4ff;border-right:2px solid #00b4ff}
+.c-bl{bottom:12px;left:12px;border-bottom:2px solid #00b4ff;border-left:2px solid #00b4ff}
+.c-br{bottom:12px;right:12px;border-bottom:2px solid #00b4ff;border-right:2px solid #00b4ff}
 
-/* particles */
-.pt { position:absolute; border-radius:50%; animation:float-up linear infinite; z-index:2; pointer-events:none; opacity:0; }
-@keyframes float-up { 0%{transform:translateY(105%);opacity:0} 10%{opacity:1} 90%{opacity:.4} 100%{transform:translateY(-5%);opacity:0} }
+.pt{position:absolute;border-radius:50%;animation:fup linear infinite;z-index:2;pointer-events:none;opacity:0}
+@keyframes fup{0%{transform:translateY(105%);opacity:0}10%{opacity:1}90%{opacity:.4}100%{transform:translateY(-5%);opacity:0}}
 
-/* ── CONTENT ── */
-.content { position:relative; z-index:5; padding:44px 52px 40px; display:flex; flex-direction:column; align-items:center; }
+/* CONTENT */
+.content{position:relative;z-index:5;padding:32px 20px 28px;display:flex;flex-direction:column;align-items:center;gap:0}
 
-/* top badge */
-.top-badge { display:flex; align-items:center; gap:10px; margin-bottom:26px; }
-.bl { width:50px; height:1px; background:linear-gradient(90deg,transparent,#00b4ff); }
-.bl.r { background:linear-gradient(90deg,#00b4ff,transparent); }
-.bt { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:#00d4ff; text-transform:uppercase; }
+/* TOP BADGE */
+.top-badge{display:flex;align-items:center;gap:8px;margin-bottom:20px;width:100%;justify-content:center}
+.bl{width:36px;height:1px;background:linear-gradient(90deg,transparent,#00b4ff);flex-shrink:0}
+.bl.r{background:linear-gradient(90deg,#00b4ff,transparent)}
+.bt{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:#00d4ff;text-transform:uppercase;text-align:center}
 
-/* hero visual */
-.hero { display:flex; align-items:center; justify-content:center; gap:18px; margin-bottom:28px; width:100%; }
+/* HERO */
+.hero{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:22px;width:100%}
+.hero-left{display:flex;flex-direction:column;align-items:stretch;gap:0;flex-shrink:0;min-width:0;flex:0 0 auto;width:clamp(120px,32vw,155px)}
 
-/* Left column stacks sketch.ino on top of IoT panel */
-.hero-left { display:flex; flex-direction:column; align-items:stretch; gap:0; flex-shrink:0; width:170px; }
+.hero-or{display:flex;align-items:center;gap:6px;padding:5px 0}
+.or-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(0,180,255,.2),transparent)}
+.or-text{font-family:'Share Tech Mono',monospace;font-size:8px;color:#2a5a6a;letter-spacing:2px;white-space:nowrap}
 
-.hero-or { display:flex; align-items:center; gap:8px; padding:6px 0; }
-.or-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,rgba(0,180,255,.2),transparent); }
-.or-text { font-family:'Share Tech Mono',monospace; font-size:9px; color:#2a5a6a; letter-spacing:2px; white-space:nowrap; }
+.cp{background:#020c16;border:1px solid rgba(0,180,255,.18);border-radius:6px;padding:10px 12px;
+  font-family:'Share Tech Mono',monospace;font-size:clamp(8px,2vw,10.5px);color:#4fc3f7;line-height:1.8;
+  width:100%;flex-shrink:0;box-shadow:inset 0 0 20px rgba(0,0,0,.7);position:relative;overflow:hidden}
+.cp::before{content:'';position:absolute;top:0;left:0;right:0;height:20px;background:rgba(0,60,120,.25);border-bottom:1px solid rgba(0,100,200,.15)}
+.cpt{font-size:8px;color:#3a7a9a;letter-spacing:1px;margin-bottom:6px;margin-top:2px;position:relative;z-index:1}
+.cm{color:#2a5a6a}.kw{color:#00b0ff}.fn{color:#69f0ae}.vr{color:#ffab40}.num{color:#ea80fc}
 
-.cp { background:#020c16; border:1px solid rgba(0,180,255,.18); border-radius:6px; padding:14px 16px;
-  font-family:'Share Tech Mono',monospace; font-size:10.5px; color:#4fc3f7; line-height:1.85;
-  width:100%; flex-shrink:0; box-shadow:inset 0 0 24px rgba(0,0,0,.7); position:relative; overflow:hidden; }
-.cp::before { content:''; position:absolute; top:0;left:0;right:0;height:22px; background:rgba(0,60,120,.25); border-bottom:1px solid rgba(0,100,200,.15); }
-.cpt { font-size:9px; color:#3a7a9a; letter-spacing:1.5px; margin-bottom:8px; margin-top:2px; position:relative; z-index:1; }
-.cm{color:#2a5a6a} .kw{color:#00b0ff} .fn{color:#69f0ae} .vr{color:#ffab40} .num{color:#ea80fc}
+.iot-panel{background:#0d0a1a;border:1px solid rgba(180,80,255,.22);border-radius:6px;padding:10px 12px;
+  width:100%;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:5px;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.7),0 0 16px rgba(160,60,255,.05)}
+.iotc{background:rgba(180,80,255,.08);border:1px solid rgba(180,80,255,.2);border-radius:3px;padding:2px 8px;
+  font-family:'Share Tech Mono',monospace;font-size:9px;color:#cf80ff;letter-spacing:1.5px}
+.iotrows{font-family:'Share Tech Mono',monospace;font-size:8px;color:rgba(200,130,255,.4);text-align:center;line-height:1.7}
+.iotg{font-size:24px;filter:drop-shadow(0 0 8px rgba(180,60,255,.5))}
 
-.arrow-mid { display:flex; flex-direction:column; align-items:center; gap:8px; flex-shrink:0; }
-.al { font-family:'Share Tech Mono',monospace; font-size:9px; color:#00d4ff; letter-spacing:2px; opacity:.7; }
-.ab { display:flex; align-items:center; animation:apulse 1.8s ease-in-out infinite; }
-@keyframes apulse { 0%,100%{opacity:.5} 50%{opacity:1;filter:drop-shadow(0 0 6px #00d4ff)} }
-.at { width:48px; height:2px; background:linear-gradient(90deg,#003060,#00d4ff); }
-.ah { border-top:6px solid transparent; border-bottom:6px solid transparent; border-left:11px solid #00d4ff; }
+.arrow-mid{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;padding:0 2px}
+.al{font-family:'Share Tech Mono',monospace;font-size:8px;color:#00d4ff;letter-spacing:1.5px;opacity:.7;white-space:nowrap}
+.ab{display:flex;align-items:center;animation:ap 1.8s ease-in-out infinite}
+@keyframes ap{0%,100%{opacity:.5}50%{opacity:1;filter:drop-shadow(0 0 5px #00d4ff)}}
+.at{width:clamp(28px,6vw,48px);height:2px;background:linear-gradient(90deg,#003060,#00d4ff)}
+.ah{border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:10px solid #00d4ff}
 
-.bp { background:#01100a; border:1px solid rgba(0,255,120,.22); border-radius:6px; padding:14px 16px;
-  width:160px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:7px;
-  box-shadow:inset 0 0 24px rgba(0,0,0,.7),0 0 20px rgba(0,255,100,.05); }
-.bc { background:rgba(0,255,120,.08); border:1px solid rgba(0,255,120,.2); border-radius:3px; padding:3px 10px;
-  font-family:'Share Tech Mono',monospace; font-size:10px; color:#69f0ae; letter-spacing:2px; }
-.br { font-family:'Share Tech Mono',monospace; font-size:8px; color:rgba(105,240,174,.4); text-align:center; line-height:1.6; word-break:break-all; }
-.bg { font-size:28px; filter:drop-shadow(0 0 10px rgba(0,255,120,.5)); }
+.bp{background:#01100a;border:1px solid rgba(0,255,120,.22);border-radius:6px;padding:10px 12px;
+  flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:6px;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.7);width:clamp(110px,28vw,150px)}
+.bc{background:rgba(0,255,120,.08);border:1px solid rgba(0,255,120,.2);border-radius:3px;padding:2px 8px;
+  font-family:'Share Tech Mono',monospace;font-size:9px;color:#69f0ae;letter-spacing:1.5px}
+.br{font-family:'Share Tech Mono',monospace;font-size:7px;color:rgba(105,240,174,.35);text-align:center;line-height:1.6;word-break:break-all}
+.bg-i{font-size:24px;filter:drop-shadow(0 0 8px rgba(0,255,120,.5))}
 
-/* IoT mini panel */
-.iot-panel { background:#0d0a1a; border:1px solid rgba(180,80,255,.22); border-radius:6px; padding:12px 16px;
-  width:100%; flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:6px;
-  box-shadow:inset 0 0 24px rgba(0,0,0,.7),0 0 20px rgba(160,60,255,.05); }
-.iotc { background:rgba(180,80,255,.08); border:1px solid rgba(180,80,255,.2); border-radius:3px; padding:3px 10px;
-  font-family:'Share Tech Mono',monospace; font-size:10px; color:#cf80ff; letter-spacing:2px; }
-.iotrows { font-family:'Share Tech Mono',monospace; font-size:9px; color:rgba(200,130,255,.4); text-align:center; line-height:1.8; }
-.iotg { font-size:28px; filter:drop-shadow(0 0 10px rgba(180,60,255,.5)); }
+/* TITLE */
+.main-title{text-align:center;margin-bottom:4px;width:100%}
+.eyebrow{font-family:'Share Tech Mono',monospace;font-size:9px;color:#2a6a8a;letter-spacing:4px;text-transform:uppercase;margin-bottom:6px}
+h1{font-family:'Orbitron',sans-serif;font-size:clamp(20px,6vw,30px);font-weight:900;color:#fff;letter-spacing:1px;line-height:1.15;text-transform:uppercase;text-shadow:0 0 30px rgba(0,180,255,.35)}
+h1 .ac{color:#00d4ff;text-shadow:0 0 16px rgba(0,212,255,.8)}
+.tagline{font-family:'Orbitron',sans-serif;font-size:clamp(8px,2.2vw,11px);font-weight:700;color:#69f0ae;letter-spacing:3px;text-transform:uppercase;margin-top:7px;text-shadow:0 0 8px rgba(105,240,174,.4)}
 
-/* title */
-.main-title { text-align:center; margin-bottom:6px; }
-.eyebrow { font-family:'Share Tech Mono',monospace; font-size:11px; color:#2a6a8a; letter-spacing:5px; text-transform:uppercase; margin-bottom:8px; }
-h1 { font-family:'Orbitron',sans-serif; font-size:30px; font-weight:900; color:#fff; letter-spacing:1.5px; line-height:1.15; text-transform:uppercase; text-shadow:0 0 40px rgba(0,180,255,.35); }
-h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
-.tagline { font-family:'Orbitron',sans-serif; font-size:11px; font-weight:700; color:#69f0ae; letter-spacing:4px; text-transform:uppercase; margin-top:8px; text-shadow:0 0 10px rgba(105,240,174,.4); }
+.sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,#0a3050,#00b4ff 50%,#0a3050,transparent);margin:18px 0;position:relative}
+.sep::after{content:'◆';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:#00b4ff;font-size:8px;background:#060d1a;padding:0 6px}
 
-.sep { width:100%; height:1px; background:linear-gradient(90deg,transparent,#0a3050,#00b4ff 50%,#0a3050,transparent); margin:22px 0; position:relative; }
-.sep::after { content:'◆'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); color:#00b4ff; font-size:9px; background:#060d1a; padding:0 8px; }
+/* PRICING — responsive: 1 col mobile, 3 col desktop */
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:10px;width:100%;margin-bottom:16px}
+@media(min-width:480px){.pricing-grid{grid-template-columns:1fr 1fr 1fr}}
 
-/* ── PRICING 3 COLS ── */
-.pricing-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; width:100%; margin-bottom:20px; }
+.pc{border-radius:8px;padding:16px 14px 14px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:8px}
+.pa{background:linear-gradient(150deg,#04111e,#020c18);border:1px solid rgba(0,150,255,.22)}
+.pa::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#003a6a,#00b4ff,#003a6a)}
+.pb{background:linear-gradient(150deg,#051808,#030f06);border:1px solid rgba(0,220,100,.22)}
+.pb::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#003a15,#00e676,#003a15)}
+.pc-iot{background:linear-gradient(150deg,#100b1e,#0a0612);border:1px solid rgba(180,80,255,.22)}
+.pc-iot::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,#3a0060,#cf80ff,#3a0060)}
 
-.pc { border-radius:6px; padding:18px 16px 16px; position:relative; overflow:hidden; display:flex; flex-direction:column; gap:9px; }
+/* On mobile, show pricing as horizontal layout inside card */
+@media(max-width:479px){
+  .pc{flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:10px}
+  .pc .pbadge{width:100%}
+  .pc .pname{flex:1;min-width:120px}
+  .pc .prow{flex-shrink:0}
+  .pc .pfeats{width:100%}
+}
 
-/* plan colors */
-.pa { background:linear-gradient(150deg,#04111e,#020c18); border:1px solid rgba(0,150,255,.22); }
-.pa::before { content:''; position:absolute; top:0;left:0;width:100%;height:3px; background:linear-gradient(90deg,#003a6a,#00b4ff,#003a6a); }
+.pbadge{display:inline-flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 9px;border-radius:2px;width:fit-content}
+.pa .pbadge{background:rgba(0,150,255,.1);border:1px solid rgba(0,150,255,.3);color:#00b4ff}
+.pb .pbadge{background:rgba(0,220,100,.1);border:1px solid rgba(0,220,100,.3);color:#00e676}
+.pc-iot .pbadge{background:rgba(180,80,255,.1);border:1px solid rgba(180,80,255,.3);color:#cf80ff}
 
-.pb { background:linear-gradient(150deg,#051808,#030f06); border:1px solid rgba(0,220,100,.22); box-shadow:0 0 28px rgba(0,200,80,.05); }
-.pb::before { content:''; position:absolute; top:0;left:0;width:100%;height:3px; background:linear-gradient(90deg,#003a15,#00e676,#003a15); }
+.pname{font-family:'Orbitron',sans-serif;font-size:clamp(11px,2.5vw,13px);font-weight:700;letter-spacing:.5px;color:#e8f4ff;line-height:1.3}
 
-.pc-iot { background:linear-gradient(150deg,#100b1e,#0a0612); border:1px solid rgba(180,80,255,.22); box-shadow:0 0 28px rgba(160,60,255,.05); }
-.pc-iot::before { content:''; position:absolute; top:0;left:0;width:100%;height:3px; background:linear-gradient(90deg,#3a0060,#cf80ff,#3a0060); }
+.prow{display:flex;align-items:baseline;gap:3px}
+.pcur{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600}
+.pa .pcur{color:#4a9acc}.pb .pcur{color:#4ac87a}.pc-iot .pcur{color:#b870e0}
+.pamt{font-family:'Orbitron',sans-serif;font-size:clamp(24px,5vw,30px);font-weight:900;line-height:1}
+.pa .pamt{color:#00d4ff;text-shadow:0 0 14px rgba(0,212,255,.4)}
+.pb .pamt{color:#00e676;text-shadow:0 0 14px rgba(0,230,118,.4)}
+.pc-iot .pamt{color:#cf80ff;text-shadow:0 0 14px rgba(207,128,255,.4)}
+.punit{font-family:'Share Tech Mono',monospace;font-size:10px;opacity:.6;line-height:1.2}
+.pa .punit{color:#00b4ff}.pb .punit{color:#00e676}.pc-iot .punit{color:#cf80ff}
 
-.pbadge { display:inline-flex; align-items:center; gap:5px; font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; padding:3px 9px; border-radius:2px; width:fit-content; }
-.pa .pbadge { background:rgba(0,150,255,.1); border:1px solid rgba(0,150,255,.3); color:#00b4ff; }
-.pb .pbadge { background:rgba(0,220,100,.1); border:1px solid rgba(0,220,100,.3); color:#00e676; }
-.pc-iot .pbadge { background:rgba(180,80,255,.1); border:1px solid rgba(180,80,255,.3); color:#cf80ff; }
-
-.pname { font-family:'Orbitron',sans-serif; font-size:12px; font-weight:700; letter-spacing:.5px; color:#e8f4ff; line-height:1.3; }
-
-.prow { display:flex; align-items:baseline; gap:3px; }
-.pcur { font-family:'Rajdhani',sans-serif; font-size:13px; font-weight:600; }
-.pa .pcur{color:#4a9acc} .pb .pcur{color:#4ac87a} .pc-iot .pcur{color:#b870e0}
-
-.pamt { font-family:'Orbitron',sans-serif; font-size:30px; font-weight:900; line-height:1; }
-.pa .pamt{color:#00d4ff;text-shadow:0 0 16px rgba(0,212,255,.4)}
-.pb .pamt{color:#00e676;text-shadow:0 0 16px rgba(0,230,118,.4)}
-.pc-iot .pamt{color:#cf80ff;text-shadow:0 0 16px rgba(207,128,255,.4)}
-
-.punit { font-family:'Share Tech Mono',monospace; font-size:10px; opacity:.6; line-height:1.2; }
-.pa .punit{color:#00b4ff} .pb .punit{color:#00e676} .pc-iot .punit{color:#cf80ff}
-
-.pfeats { list-style:none; display:flex; flex-direction:column; gap:5px; }
-.pfeats li { font-family:'Rajdhani',sans-serif; font-size:12px; font-weight:600; color:#4a7a9b; display:flex; align-items:center; gap:6px; }
-.dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:5px}
+.pfeats li{font-family:'Rajdhani',sans-serif;font-size:12px;font-weight:600;color:#4a7a9b;display:flex;align-items:center;gap:6px}
+.dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
 .pa .dot{background:#00b4ff;box-shadow:0 0 4px #00b4ff}
 .pb .dot{background:#00e676;box-shadow:0 0 4px #00e676}
 .pc-iot .dot{background:#cf80ff;box-shadow:0 0 4px #cf80ff}
 
-/* ── TRIAL SECTION ── */
-.trial-section { width:100%; display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:20px; }
+/* TRIAL SECTION — 1 col mobile, 3 col desktop */
+.trial-section{display:grid;grid-template-columns:1fr;gap:10px;width:100%;margin-bottom:16px}
+@media(min-width:480px){.trial-section{grid-template-columns:1fr 1fr 1fr}}
 
-.trial-card {
-  border-radius:6px; padding:14px 14px 12px; position:relative; overflow:hidden;
-  display:flex; flex-direction:column; gap:8px; cursor:pointer;
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.trial-card:hover { transform:translateY(-2px); }
+.trial-card{border-radius:8px;padding:14px 13px 12px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:7px;cursor:default}
+.ta{background:linear-gradient(135deg,rgba(0,40,80,.7),rgba(0,20,40,.9));border:1px solid rgba(0,150,255,.25)}
+.tb{background:linear-gradient(135deg,rgba(0,40,20,.7),rgba(0,20,10,.9));border:1px solid rgba(0,200,80,.25)}
+.tc{background:linear-gradient(135deg,rgba(50,10,80,.7),rgba(25,5,40,.9));border:1px solid rgba(180,80,255,.25)}
 
-.trial-card.ta { background:linear-gradient(135deg,rgba(0,40,80,.6),rgba(0,20,40,.8)); border:1px solid rgba(0,150,255,.25); }
-.trial-card.tb { background:linear-gradient(135deg,rgba(0,40,20,.6),rgba(0,20,10,.8)); border:1px solid rgba(0,200,80,.25); }
-.trial-card.tc { background:linear-gradient(135deg,rgba(50,10,80,.6),rgba(25,5,40,.8)); border:1px solid rgba(180,80,255,.25); }
+.trial-tag{font-family:'Share Tech Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase}
+.ta .trial-tag{color:#00b4ff}.tb .trial-tag{color:#00e676}.tc .trial-tag{color:#cf80ff}
 
-.trial-card.ta:hover { box-shadow:0 0 20px rgba(0,150,255,.15); }
-.trial-card.tb:hover { box-shadow:0 0 20px rgba(0,200,80,.15); }
-.trial-card.tc:hover { box-shadow:0 0 20px rgba(180,80,255,.15); }
+.trial-title{font-family:'Orbitron',sans-serif;font-size:clamp(10px,2.5vw,12px);font-weight:700;color:#ddeeff;letter-spacing:.5px;line-height:1.3}
 
-.trial-tag { font-family:'Share Tech Mono',monospace; font-size:8.5px; letter-spacing:2px; text-transform:uppercase; }
-.ta .trial-tag{color:#00b4ff} .tb .trial-tag{color:#00e676} .tc .trial-tag{color:#cf80ff}
+.trial-counter-wrap{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-wrap:wrap}
+.trial-count-label{font-family:'Share Tech Mono',monospace;font-size:8px;color:#3a6a8a;letter-spacing:1px;flex-shrink:0}
+.counter-badges{display:flex;gap:3px;flex-wrap:wrap;max-width:100%}
+.cb{width:18px;height:18px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'Share Tech Mono',monospace;font-size:9px;font-weight:700;transition:all .3s ease}
+.cb.active.ca{background:rgba(0,150,255,.15);border:1px solid rgba(0,150,255,.5);color:#00d4ff;box-shadow:0 0 6px rgba(0,150,255,.25)}
+.cb.active.cg{background:rgba(0,200,80,.15);border:1px solid rgba(0,200,80,.5);color:#00e676;box-shadow:0 0 6px rgba(0,200,80,.25)}
+.cb.active.cp2{background:rgba(180,80,255,.15);border:1px solid rgba(180,80,255,.5);color:#cf80ff;box-shadow:0 0 6px rgba(180,80,255,.25)}
+.cb.used{background:rgba(20,20,20,.5);border:1px solid rgba(50,50,50,.5);color:#2a2a2a}
 
-.trial-title { font-family:'Orbitron',sans-serif; font-size:10.5px; font-weight:700; color:#ddeeff; letter-spacing:.5px; line-height:1.3; }
+.trial-desc-sm{font-family:'Rajdhani',sans-serif;font-size:11.5px;color:#3a6a8a;font-weight:600;line-height:1.4}
+.trial-desc-sm b{color:#6aadcc}
 
-.trial-counter-wrap { display:flex; align-items:center; justify-content:space-between; }
-.trial-count-label { font-family:'Share Tech Mono',monospace; font-size:9px; color:#3a6a8a; letter-spacing:1px; }
-.counter-badges { display:flex; gap:5px; }
-.cb {
-  width:22px; height:22px; border-radius:3px; display:flex; align-items:center; justify-content:center;
-  font-family:'Share Tech Mono',monospace; font-size:11px; font-weight:700; transition:all .3s ease;
-  cursor:pointer; user-select:none;
-}
-.cb.active.ca { background:rgba(0,150,255,.15); border:1px solid rgba(0,150,255,.5); color:#00d4ff; box-shadow:0 0 8px rgba(0,150,255,.3); }
-.cb.active.cg { background:rgba(0,200,80,.15); border:1px solid rgba(0,200,80,.5); color:#00e676; box-shadow:0 0 8px rgba(0,200,80,.3); }
-.cb.active.cp2 { background:rgba(180,80,255,.15); border:1px solid rgba(180,80,255,.5); color:#cf80ff; box-shadow:0 0 8px rgba(180,80,255,.3); }
-.cb.used { background:rgba(30,30,30,.5); border:1px solid rgba(60,60,60,.5); color:#333; }
+.trial-btn{padding:9px 10px;border-radius:4px;border:none;cursor:pointer;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;transition:all .25s ease;width:100%;text-align:center}
+.ta .trial-btn{background:rgba(0,150,255,.12);border:1px solid rgba(0,150,255,.35);color:#00b4ff}
+.tb .trial-btn{background:rgba(0,200,80,.12);border:1px solid rgba(0,200,80,.35);color:#00e676}
+.tc .trial-btn{background:rgba(180,80,255,.12);border:1px solid rgba(180,80,255,.35);color:#cf80ff}
+.trial-btn:not(:disabled):hover{filter:brightness(1.35);transform:translateY(-1px)}
+.trial-btn:disabled{opacity:.3;cursor:not-allowed;filter:none}
 
-.trial-desc-sm { font-family:'Rajdhani',sans-serif; font-size:11px; color:#3a6a8a; font-weight:600; line-height:1.4; }
-.trial-desc-sm b { color:#6aadcc; }
+.trial-wa-sep{width:100%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);margin:1px 0}
 
-.trial-btn {
-  margin-top:2px; padding:7px 10px; border-radius:3px; border:none; cursor:pointer;
-  font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase;
-  transition:all .25s ease; width:100%; text-align:center;
-}
-.ta .trial-btn { background:rgba(0,150,255,.1); border:1px solid rgba(0,150,255,.3); color:#00b4ff; }
-.tb .trial-btn { background:rgba(0,200,80,.1); border:1px solid rgba(0,200,80,.3); color:#00e676; }
-.tc .trial-btn { background:rgba(180,80,255,.1); border:1px solid rgba(180,80,255,.3); color:#cf80ff; }
-.trial-btn:hover { filter:brightness(1.3); }
-.trial-btn:disabled { opacity:.35; cursor:not-allowed; filter:none; }
+.trial-wa{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:8px 10px;border-radius:4px;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;transition:all .25s ease;background:rgba(37,211,102,.07);border:1px solid rgba(37,211,102,.22);color:#25d366}
+.trial-wa:hover{background:rgba(37,211,102,.16);border-color:rgba(37,211,102,.5);transform:translateY(-1px);box-shadow:0 0 10px rgba(37,211,102,.12)}
+.trial-wa-icon{font-size:12px}
 
-.trial-used-msg { font-family:'Share Tech Mono',monospace; font-size:9px; color:#ff4444; letter-spacing:1px; text-align:center; padding:4px 0; display:none; }
-.trial-used-msg.show { display:block; animation:blink-msg 1.5s ease-in-out 3; }
-@keyframes blink-msg { 0%,100%{opacity:1} 50%{opacity:.4} }
+.trial-used-msg{font-family:'Share Tech Mono',monospace;font-size:9px;color:#ff4444;letter-spacing:1px;text-align:center;padding:3px 0;display:none}
+.trial-used-msg.show{display:block;animation:blink 1.5s ease-in-out 3}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* WA mini link inside trial card */
-.trial-wa {
-  display:flex; align-items:center; justify-content:center; gap:7px;
-  width:100%; padding:7px 10px; border-radius:3px; text-decoration:none;
-  font-family:'Share Tech Mono',monospace; font-size:9px; letter-spacing:1.5px;
-  text-transform:uppercase; transition:all .25s ease; margin-top:0;
-  position:relative; overflow:hidden;
-}
-.ta .trial-wa { background:rgba(37,211,102,.07); border:1px solid rgba(37,211,102,.25); color:#25d366; }
-.tb .trial-wa { background:rgba(37,211,102,.07); border:1px solid rgba(37,211,102,.25); color:#25d366; }
-.tc .trial-wa { background:rgba(37,211,102,.07); border:1px solid rgba(37,211,102,.25); color:#25d366; }
-.trial-wa:hover { background:rgba(37,211,102,.15); border-color:rgba(37,211,102,.5); transform:translateY(-1px); box-shadow:0 0 12px rgba(37,211,102,.15); }
-.trial-wa-icon { font-size:13px; }
-.trial-wa-sep { width:100%; height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent); margin:4px 0; }
+/* SERVICE CHIPS */
+.schips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-bottom:18px;width:100%}
+.sc{background:rgba(0,20,40,.7);border:1px solid rgba(0,130,200,.18);border-radius:3px;padding:6px 12px;display:flex;align-items:center;gap:6px;font-family:'Rajdhani',sans-serif;font-size:11.5px;font-weight:600;color:#4a7a9b;letter-spacing:.5px;text-transform:uppercase}
 
-/* service chips */
-.schips { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-bottom:22px; width:100%; }
-.sc { background:rgba(0,20,40,.7); border:1px solid rgba(0,130,200,.2); border-radius:3px;
-  padding:7px 14px; display:flex; align-items:center; gap:7px;
-  font-family:'Rajdhani',sans-serif; font-size:12px; font-weight:600; color:#4a7a9b; letter-spacing:.5px; text-transform:uppercase; }
+/* WA BUTTON */
+.cta-sec{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:18px}
+.cta-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:3px;color:#2a5a6a;text-transform:uppercase}
 
-/* WA button */
-.cta-sec { width:100%; display:flex; flex-direction:column; align-items:center; gap:12px; margin-bottom:22px; }
-.cta-lbl { font-family:'Share Tech Mono',monospace; font-size:10px; letter-spacing:4px; color:#2a5a6a; text-transform:uppercase; }
+.wa-btn{display:flex;align-items:center;gap:12px;width:100%;background:linear-gradient(135deg,#075e54,#128c7e 50%,#075e54);border:1px solid rgba(37,211,102,.4);border-radius:8px;padding:16px 20px;text-decoration:none;color:#fff;position:relative;overflow:hidden;box-shadow:0 0 30px rgba(37,211,102,.12);transition:all .3s ease}
+.wa-btn:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(37,211,102,.25);border-color:rgba(37,211,102,.65)}
+.wa-btn::after{content:'';position:absolute;top:-50%;left:-70%;width:50%;height:200%;background:rgba(255,255,255,.07);transform:skewX(-25deg);animation:shine 4s ease-in-out infinite}
+@keyframes shine{0%,75%,100%{left:-70%;opacity:0}40%{left:140%;opacity:1}}
+.wai{font-size:28px;filter:drop-shadow(0 0 8px rgba(37,211,102,.5));flex-shrink:0}
+.wat{font-family:'Orbitron',sans-serif;font-size:clamp(13px,3.5vw,16px);font-weight:900;letter-spacing:1.5px;color:#fff;text-shadow:0 0 10px rgba(37,211,102,.35);text-transform:uppercase}
+.was{font-family:'Share Tech Mono',monospace;font-size:10px;color:rgba(255,255,255,.45);letter-spacing:1px;margin-top:2px}
+.waa{font-size:17px;color:rgba(37,211,102,.8);margin-left:auto;animation:bou 1.5s ease-in-out infinite;flex-shrink:0}
+@keyframes bou{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
 
-.wa-btn { display:flex; align-items:center; gap:14px; width:100%;
-  background:linear-gradient(135deg,#075e54,#128c7e 50%,#075e54);
-  border:1px solid rgba(37,211,102,.4); border-radius:7px; padding:17px 28px;
-  text-decoration:none; color:#fff; position:relative; overflow:hidden;
-  box-shadow:0 0 40px rgba(37,211,102,.15); transition:all .3s ease; }
-.wa-btn:hover { transform:translateY(-2px); box-shadow:0 0 60px rgba(37,211,102,.3); border-color:rgba(37,211,102,.7); }
-.wa-btn::after { content:''; position:absolute; top:-50%;left:-70%; width:50%;height:200%;
-  background:rgba(255,255,255,.07); transform:skewX(-25deg); animation:shine 4s ease-in-out infinite; }
-@keyframes shine { 0%,75%,100%{left:-70%;opacity:0} 40%{left:140%;opacity:1} }
-.wai { font-size:30px; filter:drop-shadow(0 0 8px rgba(37,211,102,.6)); flex-shrink:0; }
-.wat { font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; letter-spacing:2px; color:#fff; text-shadow:0 0 12px rgba(37,211,102,.4); text-transform:uppercase; }
-.was { font-family:'Share Tech Mono',monospace; font-size:11px; color:rgba(255,255,255,.5); letter-spacing:1.5px; margin-top:3px; }
-.waa { font-size:18px; color:rgba(37,211,102,.8); margin-left:auto; animation:bounce 1.5s ease-in-out infinite; }
-@keyframes bounce { 0%,100%{transform:translateX(0)} 50%{transform:translateX(5px)} }
+/* STATS */
+.stats{width:100%;display:flex;justify-content:space-around;padding-top:14px;border-top:1px solid rgba(0,80,140,.18)}
+.si{text-align:center}
+.sn{font-family:'Orbitron',sans-serif;font-size:clamp(14px,4vw,19px);font-weight:900;color:#00d4ff;text-shadow:0 0 8px rgba(0,212,255,.4);display:block;margin-bottom:3px}
+.sl{font-family:'Rajdhani',sans-serif;font-size:clamp(8px,2vw,10px);color:#2a5a6a;letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.sv{width:1px;background:rgba(0,80,140,.18);align-self:stretch}
 
-/* stats */
-.stats { width:100%; display:flex; justify-content:space-around; padding-top:16px; border-top:1px solid rgba(0,80,140,.2); }
-.si { text-align:center; }
-.sn { font-family:'Orbitron',sans-serif; font-size:19px; font-weight:900; color:#00d4ff; text-shadow:0 0 10px rgba(0,212,255,.4); display:block; margin-bottom:3px; }
-.sl { font-family:'Rajdhani',sans-serif; font-size:10px; color:#2a5a6a; letter-spacing:1.5px; text-transform:uppercase; font-weight:700; }
-.sv { width:1px; background:rgba(0,80,140,.2); align-self:stretch; }
-
-/* modal overlay */
-.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:100; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
-.modal.open { display:flex; }
-.modal-box {
-  background:linear-gradient(160deg,#091828,#060d18); border:1px solid rgba(0,180,255,.3);
-  border-radius:10px; padding:32px 36px; max-width:380px; width:90%; text-align:center;
-  box-shadow:0 0 60px rgba(0,100,200,.3); position:relative;
-  animation:pop-in .25s ease;
-}
-@keyframes pop-in { from{transform:scale(.85);opacity:0} to{transform:scale(1);opacity:1} }
-.modal-icon { font-size:42px; margin-bottom:12px; }
-.modal-title { font-family:'Orbitron',sans-serif; font-size:16px; font-weight:900; color:#fff; letter-spacing:1.5px; margin-bottom:8px; }
-.modal-desc { font-family:'Rajdhani',sans-serif; font-size:14px; color:#4a8aaa; font-weight:600; line-height:1.5; margin-bottom:20px; }
-.modal-close { background:rgba(0,180,255,.12); border:1px solid rgba(0,180,255,.3); color:#00d4ff; font-family:'Share Tech Mono',monospace; font-size:11px; letter-spacing:2px; padding:10px 24px; border-radius:4px; cursor:pointer; text-transform:uppercase; transition:all .2s; }
-.modal-close:hover { background:rgba(0,180,255,.25); }
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:20px}
+.modal.open{display:flex}
+.modal-box{background:linear-gradient(160deg,#091828,#060d18);border:1px solid rgba(0,180,255,.3);border-radius:12px;padding:28px 24px;max-width:340px;width:100%;text-align:center;box-shadow:0 0 50px rgba(0,100,200,.25);animation:popin .22s ease}
+@keyframes popin{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-icon{font-size:38px;margin-bottom:10px}
+.modal-title{font-family:'Orbitron',sans-serif;font-size:15px;font-weight:900;color:#fff;letter-spacing:1.5px;margin-bottom:8px}
+.modal-desc{font-family:'Rajdhani',sans-serif;font-size:14px;color:#4a8aaa;font-weight:600;line-height:1.5;margin-bottom:18px}
+.modal-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:6px;text-decoration:none;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.35);color:#25d366;margin-bottom:10px;transition:all .2s}
+.modal-wa:hover{background:rgba(37,211,102,.22)}
+.modal-close{background:rgba(0,180,255,.1);border:1px solid rgba(0,180,255,.25);color:#00d4ff;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;padding:9px 20px;border-radius:4px;cursor:pointer;text-transform:uppercase;transition:all .2s;width:100%}
+.modal-close:hover{background:rgba(0,180,255,.2)}
 </style>
 </head>
 <body>
@@ -277,22 +235,24 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
 <div class="modal" id="modal">
   <div class="modal-box">
     <div class="modal-icon" id="modal-icon">✅</div>
-    <div class="modal-title" id="modal-title">TRIAL DIPAKAI!</div>
-    <div class="modal-desc" id="modal-desc">Trial kamu berhasil diklaim. Hubungi kami via WhatsApp untuk mulai!</div>
+    <div class="modal-title" id="modal-title">TRIAL DIKLAIM!</div>
+    <div class="modal-desc" id="modal-desc">Trial berhasil diklaim!</div>
+    <a class="modal-wa" id="modal-wa-link" href="#" target="_blank" rel="noopener">
+      <span>💬</span> Hubungi Admin via WhatsApp
+    </a>
     <button class="modal-close" onclick="closeModal()">TUTUP</button>
   </div>
 </div>
 
 <div class="card">
-  <div class="glow-t"></div><div class="glow-g"></div><div class="glow-p"></div>
+  <div class="glow-t"></div><div class="glow-g"></div>
   <div class="scanline"></div>
   <div class="corner c-tl"></div><div class="corner c-tr"></div>
   <div class="corner c-bl"></div><div class="corner c-br"></div>
   <div class="pt" style="width:3px;height:3px;background:#00d4ff;left:10%;animation-duration:10s;animation-delay:0s"></div>
-  <div class="pt" style="width:2px;height:2px;background:#69f0ae;left:27%;animation-duration:13s;animation-delay:3s"></div>
-  <div class="pt" style="width:2px;height:2px;background:#cf80ff;left:55%;animation-duration:8s;animation-delay:1.5s"></div>
-  <div class="pt" style="width:3px;height:3px;background:#ffd740;left:75%;animation-duration:12s;animation-delay:5s"></div>
-  <div class="pt" style="width:2px;height:2px;background:#00b4ff;left:88%;animation-duration:9s;animation-delay:2s"></div>
+  <div class="pt" style="width:2px;height:2px;background:#69f0ae;left:28%;animation-duration:13s;animation-delay:3s"></div>
+  <div class="pt" style="width:2px;height:2px;background:#cf80ff;left:58%;animation-duration:9s;animation-delay:1.5s"></div>
+  <div class="pt" style="width:3px;height:3px;background:#ffd740;left:78%;animation-duration:12s;animation-delay:5s"></div>
 
   <div class="content">
 
@@ -303,21 +263,18 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
       <div class="bl r"></div>
     </div>
 
-    <!-- Hero visual: [sketch.ino / IoT panel] → arrow → [.bin] -->
+    <!-- Hero visual -->
     <div class="hero">
-
-      <!-- Left stack: code input on top, IoT panel below -->
       <div class="hero-left">
         <div class="cp">
           <div class="cpt">◦ sketch.ino</div>
-          <div class="cm">// Arduino Code</div>
+          <div class="cm">// Arduino</div>
           <div><span class="kw">void</span> <span class="fn">setup</span>(){</div>
-          <div>&nbsp;&nbsp;<span class="fn">pinMode</span>(<span class="num">13</span>,<span class="vr">OUT</span>);</div>
+          <div>&nbsp;<span class="fn">pinMode</span>(<span class="num">13</span>,<span class="vr">OUT</span>);</div>
           <div>}</div>
           <div><span class="kw">void</span> <span class="fn">loop</span>(){</div>
-          <div>&nbsp;&nbsp;<span class="fn">digitalWrite</span>(</div>
-          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="num">13</span>,<span class="vr">HIGH</span>);</div>
-          <div>&nbsp;&nbsp;<span class="fn">delay</span>(<span class="num">500</span>);</div>
+          <div>&nbsp;<span class="fn">write</span>(<span class="num">13</span>,<span class="vr">HIGH</span>);</div>
+          <div>&nbsp;<span class="fn">delay</span>(<span class="num">500</span>);</div>
           <div>}</div>
         </div>
         <div class="hero-or">
@@ -332,20 +289,17 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
         </div>
       </div>
 
-      <!-- Arrow middle -->
       <div class="arrow-mid">
         <div class="al">COMPILE</div>
         <div class="ab"><div class="at"></div><div class="ah"></div></div>
         <div class="al">.BIN</div>
       </div>
 
-      <!-- Right: .bin output -->
       <div class="bp">
-        <div class="bg">⬡</div>
+        <div class="bg-i">⬡</div>
         <div class="bc">.BIN FILE</div>
         <div class="br">01001000 10110100<br>11001010 00110101<br>10001100 01011011<br>01110010 11000100</div>
       </div>
-
     </div>
 
     <!-- Title -->
@@ -357,10 +311,8 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
 
     <div class="sep"></div>
 
-    <!-- 3 Pricing cards -->
+    <!-- PRICING -->
     <div class="pricing-grid">
-
-      <!-- BASIC -->
       <div class="pc pa">
         <div class="pbadge">⬡ BASIC</div>
         <div class="pname">Konversi ke .BIN<br><span style="font-size:10px;color:#2a6a8a;font-family:'Share Tech Mono',monospace">Tanpa Perbaikan</span></div>
@@ -377,7 +329,6 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
         </ul>
       </div>
 
-      <!-- PRO -->
       <div class="pc pb">
         <div class="pbadge">⭐ PRO</div>
         <div class="pname">Konversi + Perbaikan<br><span style="font-size:10px;color:#1a6a3a;font-family:'Share Tech Mono',monospace">Full Service</span></div>
@@ -394,7 +345,6 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
         </ul>
       </div>
 
-      <!-- IoT -->
       <div class="pc pc-iot">
         <div class="pbadge">🌐 IOT</div>
         <div class="pname">Project IoT<br><span style="font-size:10px;color:#5a3a7a;font-family:'Share Tech Mono',monospace">From Zero → .ino/.bin</span></div>
@@ -410,16 +360,14 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
           <li><span class="dot"></span>Konsultasi + revisi</li>
         </ul>
       </div>
-
     </div>
 
     <!-- TRIAL CARDS -->
     <div class="trial-section">
 
-      <!-- Trial A -->
       <div class="trial-card ta" id="tc-a">
         <div class="trial-tag">🎁 FREE TRIAL · BASIC</div>
-        <div class="trial-title">Trial Konversi<br>20 File/Code Gratis</div>
+        <div class="trial-title">Trial Konversi — 20 File Gratis</div>
         <div class="trial-counter-wrap">
           <div class="trial-count-label">SISA TRIAL</div>
           <div class="counter-badges" id="cbadge-a"></div>
@@ -427,35 +375,31 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
         <div class="trial-desc-sm">Coba <b>20 file/code</b> konversi ke .bin gratis, tanpa revisi!</div>
         <button class="trial-btn" id="tbtn-a" onclick="claimTrial('a')">▶ KLAIM TRIAL</button>
         <div class="trial-wa-sep"></div>
-        <a class="trial-wa" href="https://wa.me/6285601350515?text=Halo%20Kak%2C%20saya%20tertarik%20dengan%20paket%20%F0%9F%94%B5%20*BASIC%20%E2%80%94%20Konversi%20Code%20ke%20.BIN*%20(Rp%201K%20%2F%20100%20code)%20dan%20ingin%20mencoba%20*free%20trial%2020%20file*%20terlebih%20dahulu.%20Bisa%20dibantu%3F%20%F0%9F%99%8F" target="_blank" rel="noopener">
+        <a class="trial-wa" href="https://wa.me/6285601350515?text=Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20tertarik%20dengan%20paket%20%F0%9F%94%B5%20*BASIC%20%E2%80%94%20Konversi%20Code%20ke%20.BIN*%20%28Rp%201K%20%2F%20100%20code%29.%20Saya%20ingin%20mencoba%20*free%20trial%2020%20file*%20terlebih%20dahulu.%20Bisa%20dibantu%3F%20%F0%9F%98%8A" target="_blank" rel="noopener">
           <span class="trial-wa-icon">💬</span> ORDER via WhatsApp
         </a>
         <div class="trial-used-msg" id="tmsg-a">⚠ TRIAL SUDAH HABIS</div>
       </div>
 
-      <!-- Trial B -->
       <div class="trial-card tb" id="tc-b">
         <div class="trial-tag">🎁 FREE TRIAL · PRO</div>
-        <div class="trial-title">Trial Perbaikan<br>1 File/Code Gratis</div>
+        <div class="trial-title">Trial Perbaikan — 1 File Gratis</div>
         <div class="trial-counter-wrap">
           <div class="trial-count-label">SISA TRIAL</div>
-          <div class="counter-badges" id="cbadge-b">
-            <div class="cb active cg">✓</div>
-          </div>
+          <div class="counter-badges" id="cbadge-b"></div>
         </div>
         <div class="trial-desc-sm">Coba <b>1 file code</b> perbaikan + konversi gratis!</div>
         <button class="trial-btn" id="tbtn-b" onclick="claimTrial('b')">▶ KLAIM TRIAL</button>
         <div class="trial-wa-sep"></div>
-        <a class="trial-wa" href="https://wa.me/6285601350515?text=Halo%20Kak%2C%20saya%20mau%20coba%20paket%20%E2%AD%90%20*PRO%20%E2%80%94%20Konversi%20%2B%20Perbaikan%20Code*%20(Rp%201K%20%2F%2010%20code)%20dan%20ingin%20menggunakan%20*free%20trial%201%20file*%20dulu.%20Boleh%20dibantu%3F%20%F0%9F%99%8F" target="_blank" rel="noopener">
+        <a class="trial-wa" href="https://wa.me/6285601350515?text=Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20mau%20mencoba%20paket%20%E2%AD%90%20*PRO%20%E2%80%94%20Konversi%20%2B%20Perbaikan%20Code*%20%28Rp%201K%20%2F%2010%20code%29.%20Saya%20ingin%20menggunakan%20*free%20trial%201%20file*%20dulu.%20Boleh%20dibantu%3F%20%F0%9F%98%8A" target="_blank" rel="noopener">
           <span class="trial-wa-icon">💬</span> ORDER via WhatsApp
         </a>
         <div class="trial-used-msg" id="tmsg-b">⚠ TRIAL SUDAH HABIS</div>
       </div>
 
-      <!-- Trial C — 1 file IoT -->
       <div class="trial-card tc" id="tc-c">
         <div class="trial-tag">🎁 FREE TRIAL · IOT</div>
-        <div class="trial-title">Trial IoT Project<br>1 File/Code Gratis</div>
+        <div class="trial-title">Trial IoT Project — 1 File Gratis</div>
         <div class="trial-counter-wrap">
           <div class="trial-count-label">SISA TRIAL</div>
           <div class="counter-badges" id="cbadge-c"></div>
@@ -463,7 +407,7 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
         <div class="trial-desc-sm">Coba <b>1 project IoT</b> dari nol gratis, tanpa revisi!</div>
         <button class="trial-btn" id="tbtn-c" onclick="claimTrial('c')">▶ KLAIM TRIAL</button>
         <div class="trial-wa-sep"></div>
-        <a class="trial-wa" href="https://wa.me/6285601350515?text=Halo%20Kak%2C%20saya%20tertarik%20dengan%20paket%20%F0%9F%8C%90%20*IoT%20PROJECT%20%E2%80%94%20Bangun%20dari%20Nol%20ke%20.ino%2F.bin*%20(Rp%205K%20%2F%20file)%20dan%20ingin%20mencoba%20*free%20trial%201%20project*%20terlebih%20dahulu.%20Bisa%20bantu%20saya%3F%20%F0%9F%99%8F" target="_blank" rel="noopener">
+        <a class="trial-wa" href="https://wa.me/6285601350515?text=Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20tertarik%20dengan%20paket%20%F0%9F%8C%90%20*IoT%20PROJECT%20%E2%80%94%20Bangun%20dari%20Nol%20ke%20.ino%2F.bin*%20%28Rp%205K%20%2F%20file%29.%20Boleh%20saya%20coba%20*free%20trial%201%20project*%20dulu%3F%20%F0%9F%98%8A" target="_blank" rel="noopener">
           <span class="trial-wa-icon">💬</span> ORDER via WhatsApp
         </a>
         <div class="trial-used-msg" id="tmsg-c">⚠ TRIAL SUDAH HABIS</div>
@@ -471,7 +415,7 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
 
     </div>
 
-    <!-- service chips -->
+    <!-- Service chips -->
     <div class="schips">
       <div class="sc">🔄 Code → .BIN</div>
       <div class="sc">🛠️ Debug &amp; Fix</div>
@@ -480,11 +424,10 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
       <div class="sc">⚡ Proses Cepat</div>
     </div>
 
-    <!-- WA CTA -->
+    <!-- WA Main CTA -->
     <div class="cta-sec">
-      <div class="cta-lbl">▸ Hubungi kami sekarang ◂</div>
-      <!-- ✏️ GANTI: 628XXXXXXXXXX → nomor WA kamu (contoh: 6281234567890) -->
-      <a class="wa-btn" href="https://wa.me/6285601350515?text=Halo%2C%20saya%20mau%20order%20jasa%20Arduino%2FIoT%20code!" target="_blank" rel="noopener">
+      <div class="cta-lbl">▸ Atau hubungi langsung ◂</div>
+      <a class="wa-btn" href="https://wa.me/6285601350515?text=Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20ingin%20mengetahui%20lebih%20lanjut%20tentang%20jasa%20Arduino%20%26%20IoT%20code.%20Bisa%20dibantu%3F" target="_blank" rel="noopener">
         <div class="wai">💬</div>
         <div>
           <div class="wat">Chat via WhatsApp</div>
@@ -496,89 +439,82 @@ h1 .ac { color:#00d4ff; text-shadow:0 0 20px rgba(0,212,255,.8); }
 
     <!-- Stats -->
     <div class="stats">
-      <div class="si"><span class="sn">FREE</span><div class="sl">Trial Tersedia</div></div>
+      <div class="si"><span class="sn">FREE</span><div class="sl">Trial Ada</div></div>
       <div class="sv"></div>
-      <div class="si"><span class="sn">12H</span><div class="sl">Pengerjaan</div></div>
+      <div class="si"><span class="sn">24H</span><div class="sl">Pengerjaan</div></div>
       <div class="sv"></div>
       <div class="si"><span class="sn">1K</span><div class="sl">Mulai Dari</div></div>
       <div class="sv"></div>
-      <div class="si"><span class="sn">3</span><div class="sl">Paket Layanan</div></div>
+      <div class="si"><span class="sn">3</span><div class="sl">Paket</div></div>
     </div>
 
   </div>
 </div>
 
 <script>
-// Trial config: max count per plan
+const WA_NUM = '6285601350515'; // ✏️ GANTI dengan nomor WA kamu
+
 const TRIAL_CONFIG = {
-  a: { max: 20, key: 'trial_basic', label: 'BASIC', color: 'ca', desc: 'Satu slot trial BASIC diklaim! Sisa trial berkurang. Hubungi admin via WhatsApp.', icon: '🔵' },
-  b: { max: 1,  key: 'trial_pro',   label: 'PRO',   color: 'cg', desc: '1 file perbaikan + konversi sudah diklaim! Hubungi admin via WhatsApp.', icon: '🟢' },
-  c: { max: 1,  key: 'trial_iot',   label: 'IoT',   color: 'cp2', desc: '1 project IoT trial sudah diklaim! Hubungi admin via WhatsApp untuk mulai.', icon: '🌐' }
+  a: {
+    max: 20, key: 'trial_basic', label: 'BASIC', color: 'ca', icon: '🔵',
+    waText: 'Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20tertarik%20dengan%20paket%20%F0%9F%94%B5%20*BASIC%20%E2%80%94%20Konversi%20Code%20ke%20.BIN*%20%28Rp%201K%20%2F%20100%20code%29.%20Saya%20ingin%20mencoba%20*free%20trial%2020%20file*%20terlebih%20dahulu.%20Bisa%20dibantu%3F%20%F0%9F%98%8A'
+  },
+  b: {
+    max: 1, key: 'trial_pro', label: 'PRO', color: 'cg', icon: '⭐',
+    waText: 'Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20mau%20mencoba%20paket%20%E2%AD%90%20*PRO%20%E2%80%94%20Konversi%20%2B%20Perbaikan%20Code*%20%28Rp%201K%20%2F%2010%20code%29.%20Saya%20ingin%20menggunakan%20*free%20trial%201%20file*%20dulu.%20Boleh%20dibantu%3F%20%F0%9F%98%8A'
+  },
+  c: {
+    max: 1, key: 'trial_iot', label: 'IoT', color: 'cp2', icon: '🌐',
+    waText: 'Halo%20Kak%20%F0%9F%99%8F%2C%20saya%20tertarik%20dengan%20paket%20%F0%9F%8C%90%20*IoT%20PROJECT%20%E2%80%94%20Bangun%20dari%20Nol%20ke%20.ino%2F.bin*%20%28Rp%205K%20%2F%20file%29.%20Boleh%20saya%20coba%20*free%20trial%201%20project*%20dulu%3F%20%F0%9F%98%8A'
+  }
 };
 
-function getUsed(plan) {
-  const cfg = TRIAL_CONFIG[plan];
-  try { return parseInt(localStorage.getItem(cfg.key) || '0'); } catch(e) { return 0; }
-}
-function setUsed(plan, val) {
-  const cfg = TRIAL_CONFIG[plan];
-  try { localStorage.setItem(cfg.key, String(val)); } catch(e) {}
-}
+function getUsed(plan){ try{ return parseInt(localStorage.getItem(TRIAL_CONFIG[plan].key)||'0'); }catch(e){ return 0; } }
+function setUsed(plan,val){ try{ localStorage.setItem(TRIAL_CONFIG[plan].key,String(val)); }catch(e){} }
 
-function renderBadges(plan) {
+function renderBadges(plan){
   const cfg = TRIAL_CONFIG[plan];
   const used = getUsed(plan);
-  const remaining = cfg.max - used;
-  const wrap = document.getElementById('cbadge-' + plan);
-  const btn = document.getElementById('tbtn-' + plan);
-  const msg = document.getElementById('tmsg-' + plan);
-  wrap.innerHTML = '';
-  for (let i = 0; i < cfg.max; i++) {
-    const d = document.createElement('div');
-    d.className = 'cb ' + (i < remaining ? 'active ' + cfg.color : 'used');
-    d.textContent = i < remaining ? '✓' : '✗';
+  const rem = cfg.max - used;
+  const wrap = document.getElementById('cbadge-'+plan);
+  const btn = document.getElementById('tbtn-'+plan);
+  const msg = document.getElementById('tmsg-'+plan);
+  wrap.innerHTML='';
+  // For plan a (20 badges), show compact: max 10 per row
+  const show = Math.min(cfg.max, 20);
+  for(let i=0;i<show;i++){
+    const d=document.createElement('div');
+    d.className='cb '+(i<rem?'active '+cfg.color:'used');
+    d.textContent=i<rem?'✓':'✗';
     wrap.appendChild(d);
   }
-  if (remaining <= 0) {
-    btn.disabled = true;
-    msg.classList.add('show');
-  } else {
-    btn.disabled = false;
-    msg.classList.remove('show');
-  }
+  btn.disabled = rem<=0;
+  rem<=0 ? msg.classList.add('show') : msg.classList.remove('show');
 }
 
-function claimTrial(plan) {
-  const cfg = TRIAL_CONFIG[plan];
-  const used = getUsed(plan);
-  const remaining = cfg.max - used;
-  if (remaining <= 0) {
-    document.getElementById('tmsg-' + plan).classList.add('show');
-    return;
-  }
-  setUsed(plan, used + 1);
+function claimTrial(plan){
+  const cfg=TRIAL_CONFIG[plan];
+  const used=getUsed(plan);
+  const rem=cfg.max-used;
+  if(rem<=0){ document.getElementById('tmsg-'+plan).classList.add('show'); return; }
+  setUsed(plan,used+1);
   renderBadges(plan);
-  // show modal
-  const newRemaining = cfg.max - used - 1;
-  document.getElementById('modal-icon').textContent = cfg.icon;
-  document.getElementById('modal-title').textContent = 'TRIAL ' + cfg.label + ' DIKLAIM!';
-  document.getElementById('modal-desc').textContent = cfg.desc +
-    (cfg.max > 1 ? ' Sisa trial: ' + newRemaining + '/' + cfg.max : '');
+  const newRem=cfg.max-used-1;
+  document.getElementById('modal-icon').textContent=cfg.icon;
+  document.getElementById('modal-title').textContent='TRIAL '+cfg.label+' DIKLAIM!';
+  document.getElementById('modal-desc').textContent=
+    (cfg.max>1
+      ? 'Slot trial berhasil diklaim! Sisa: '+newRem+'/'+cfg.max+' slot.'
+      : 'Trial berhasil diklaim!'
+    )+'\nHubungi admin via WhatsApp untuk mulai sekarang 👇';
+  document.getElementById('modal-wa-link').href='https://wa.me/'+WA_NUM+'?text='+cfg.waText;
   document.getElementById('modal').classList.add('open');
 }
 
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-}
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click',function(e){ if(e.target===this) closeModal(); });
 
-document.getElementById('modal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
-});
-
-// Init on load
-renderBadges('a');
-renderBadges('b');
-renderBadges('c');
+renderBadges('a'); renderBadges('b'); renderBadges('c');
 </script>
 </body>
 </html>
